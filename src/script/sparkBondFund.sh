@@ -1,5 +1,5 @@
 #/bin/bash
-echo "四个参数，分别代表年月日 是否校验后插入数据，参数样例：2018 03 01 T"
+echo "债券基金倒入四个参数，分别代表年月日 是否校验后插入数据，参数样例：2018 03 01 T"
 echo  "开始进行数据校验"
 cd /home/u010571/dataretreive
 
@@ -25,15 +25,11 @@ fi
 
 echo "spark 任务-year:$year-month:$month-day:$day-F:$F"
 
-echo "开始进行stock类型的行情校验......"
-   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZSnapDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成股票类型的行情，开始逐笔成交类型的校验"
-   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZTradeDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成逐笔成交类型的校验，开始逐笔委托类型的校验"
-   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZOrderDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成逐笔委托类型的校验，开始指数类型的校验"
-    spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZIndexDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成指数类型的校验......"
+echo "开始进行债券类型的行情校验......"
+   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZBondDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
+echo "完成债券类型的行情，开始基金类型的校验"
+   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZFundDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
+echo "完成基金类型的校验"
 ~                                                                                                                                                                                                                               
 ~                                                                                                                                                                                                                               
 ~                                                                                                                                                                                                                               

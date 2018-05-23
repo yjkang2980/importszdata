@@ -1,5 +1,4 @@
 #!/bin/bash
-#将数据文件从dmz区机器转移到内网cdh客户机上，上传至hdfs制定目录位置，并且将文件映射为hive外表
 upToHadoop(){
   hadoop fs -test -e /user/u010571/mddata/$1new/$year/$month/$day
   if [ $? -eq 0 ]; then
@@ -11,7 +10,7 @@ upToHadoop(){
      hadoop fs -mkdir /user/u010571/mddata/$1new/$year/$month
      hadoop fs -mkdir /user/u010571/mddata/$1new/$year/$month/$day
   fi
-  hadoop fs -put -f $2 /user/u010571/mddata/$1new/$year/$month/$day/$2
+  hadoop fs -D dfs.replication=1 -put -f $2 /user/u010571/mddata/$1new/$year/$month/$day/$2
   
   if [ $? -eq 0 ];then
   echo "上传到hadoop成功，删除本地文件$2"    
@@ -27,6 +26,15 @@ year=`date +%Y`
 mad=`date +%m%d`
 month=`date +%m`
 day=`date +%d`
+
+if [ $# -eq 4 ] ; then
+year=$1
+mad=$2
+month=$3
+day=$4
+fi 
+echo "year:$year--mad:$mad--month:$month--day:$day"
+#exit 1
 #year=2018
 #mad=0330
 #month=03

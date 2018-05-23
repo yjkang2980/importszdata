@@ -14,7 +14,7 @@ cd /home/u010571/dataretreive
 year=`date +%Y`
 month=`date +%m`
 day=`date +%d`
-F=T
+F=F
 
 if [ $# -eq 4 ] ; then
 year=$1
@@ -27,13 +27,7 @@ echo "spark 任务-year:$year-month:$month-day:$day-F:$F"
 
 echo "开始进行stock类型的行情校验......"
    spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZSnapDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成股票类型的行情，开始逐笔成交类型的校验"
-   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZTradeDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成逐笔成交类型的校验，开始逐笔委托类型的校验"
-   spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZOrderDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成逐笔委托类型的校验，开始指数类型的校验"
-    spark-submit --jars /home/u010571/dataretreive/commons-net-3.5.jar --class cn.com.htsc.hqcenter.dataretrive.SZIndexDataFileAndHBaseCom --master yarn-client --num-executors 100 --executor-memory 8G importszdata-1.0-SNAPSHOT.jar $year $month $day $F
-echo "完成指数类型的校验......"
+echo "完成股票类型的行情重新插入"
 ~                                                                                                                                                                                                                               
 ~                                                                                                                                                                                                                               
 ~                                                                                                                                                                                                                               
