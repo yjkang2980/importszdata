@@ -1,0 +1,357 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>mdc</groupId>
+  <artifactId>importszdata</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>importszdata</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <scala.version>2.10.6</scala.version>
+    <sevenzipjbinding.version>9.20-2.00beta</sevenzipjbinding.version>
+  </properties>
+
+
+  <dependencies>
+
+    <!--   <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-core</artifactId>
+           <version>${org.springframework.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-context</artifactId>
+           <version>${org.springframework.version}</version>
+       </dependency>-->
+
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>1.6.0</version>
+
+    </dependency>
+
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+      </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql_2.10</artifactId>
+      <version>1.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-hive_2.10</artifactId>
+      <version>1.6.0</version>
+      <exclusions>
+          <exclusion>
+              <groupId>org.apache.hive</groupId>
+              <artifactId>hive-exec</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>org.apache.hive</groupId>
+              <artifactId>hive-metastore</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>com.twitter</groupId>
+              <artifactId>parquet-hadoop</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>org.apache.avro</groupId>
+              <artifactId>avro</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>org.apache.avro</groupId>
+              <artifactId>avro-mapred</artifactId>
+          </exclusion>
+      </exclusions>
+    </dependency>
+      <dependency>
+          <groupId>org.specs</groupId>
+          <artifactId>specs</artifactId>
+          <version>1.2.5</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.hive</groupId>
+          <artifactId>hive-jdbc</artifactId>
+          <version>1.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.hive</groupId>
+          <artifactId>hive-exec</artifactId>
+          <version>1.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.hive</groupId>
+          <artifactId>hive-metastore</artifactId>
+          <version>1.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.avro</groupId>
+          <artifactId>avro</artifactId>
+          <version>1.7.6</version>
+      </dependency>
+      <dependency>
+          <groupId>com.twitter</groupId>
+          <artifactId>parquet-hadoop</artifactId>
+          <version>1.5.0</version>
+      </dependency>
+    <!-- <dependency>
+         <groupId>org.apache.spark</groupId>
+         <artifactId>spark-streaming_2.10</artifactId>
+         <version>1.6.2</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.spark</groupId>
+         <artifactId>spark-streaming-kafka_2.10</artifactId>
+         <version>1.6.2</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.spark</groupId>
+         <artifactId>spark-streaming-flume_2.10</artifactId>
+         <version>1.6.2</version>
+     </dependency>
+     &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.spark/spark-mllib_2.10 &ndash;&gt;
+     <dependency>
+         <groupId>org.apache.spark</groupId>
+         <artifactId>spark-mllib_2.10</artifactId>
+         <version>1.6.1</version>
+     </dependency>-->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-hdfs -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-hdfs</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-common</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-auth -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-auth</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.0.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-common</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-server</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tukaani</groupId>
+      <artifactId>xz</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+      <dependency>
+          <groupId>net.sourceforge.javacsv</groupId>
+          <artifactId>javacsv</artifactId>
+          <version>2.0</version>
+      </dependency>
+
+    <dependency>
+      <groupId>org.json4s</groupId>
+      <artifactId>json4s-native_2.10</artifactId>
+      <version>3.2.11</version>
+    </dependency>
+    <!--  <dependency>
+          <groupId>org.elasticsearch</groupId>
+          <artifactId>elasticsearch-spark_2.10</artifactId>
+          <version>2.4.0</version>
+      </dependency>-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.31</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.sevenzipjbinding</groupId>
+      <artifactId>sevenzipjbinding</artifactId>
+      <version>${sevenzipjbinding.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>net.sf.sevenzipjbinding</groupId>
+      <artifactId>sevenzipjbinding-all-platforms</artifactId>
+      <version>${sevenzipjbinding.version}</version>
+    </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.10</version>
+      </dependency>
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>commons-net</groupId>
+          <artifactId>commons-net</artifactId>
+          <version>3.5</version>
+      </dependency>
+  </dependencies>
+  <build>
+
+    <resources>
+      <resource>
+        <directory>src/main/recources</directory>
+        <includes>
+          <include>*.*</include>
+        </includes>
+      </resource>
+
+    </resources>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+            </configuration>
+        </plugin>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <version>2.15.0</version>
+        <executions>
+          <execution>
+            <id>scala-compile-first</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/*.scala</include>
+              </includes>
+            </configuration>
+          </execution>
+          <!--<execution>
+            <id>scala-test-compile</id>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>-->
+        </executions>
+      </plugin>
+       <!-- <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>cn.com.htsc.hqcenter.App</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>-->
+        <!--  <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+              </archive>
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>-->
+
+    </plugins>
+  </build>
+  <!--  构建在mvn clean scala:compile compile package命令行里面输入： -->
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+  <repositories>
+     <!-- <repository>
+          <id>mvncentral</id>
+          <name>mvncentrals</name>
+          <url>http://central.maven.org/maven2/</url>
+      </repository>-->
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+    <repository>
+      <id>mdc</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://repo.htzq.htsc.com.cn/nexus/content/repositories/Architect/</url>
+    </repository>
+
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>

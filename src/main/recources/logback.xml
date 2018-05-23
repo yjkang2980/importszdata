@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property name="log_path" value="D:/logs/YT" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%5p] [%c][%M]:%L %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    <appender name="APPLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格局化输出：%d默示日期，%thread默示线程名，%-5level：级别从左显示5个字符宽度%msg：日记消息，%n是换行符 -->
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%5p] [%c][%M]:%L %msg%n
+            </pattern>
+        </layout>
+        <!--日记文件最大的大小 -->
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/YT.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+    </appender>
+    <appender name="ERRORLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- <File>D:/logs/YT_ERROR</File> -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格局化输出：%d默示日期，%thread默示线程名，%-5level：级别从左显示5个字符宽度%msg：日记消息，%n是换行符 -->
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%5p] [%c][%M]:%L %msg%n
+            </pattern>
+        </layout>
+        <!--日记文件最大的大小 -->
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/YT_ERROR.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="com.ryhmp.core.common.dao.impl" level="info"/>
+    <logger name="org.apache.zookeeper.ClientCnxn" level="info"/>
+    <root>
+        <level value="error" />
+        <level value="info" />
+        <level value="debug" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="APPLOG"/>
+        <appender-ref ref="ERRORLOG"/>
+    </root>
+</configuration>
